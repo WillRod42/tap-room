@@ -2,32 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function KegListItem(props) {
-	const price = Math.round((props.price + Number.EPSILON) * 100) / 100;
-	const alcoholContent = Math.round((props.alcoholContent + Number.EPSILON));
-
 	return (
-		<div className="row keg-list-item">
-			<div className="col-3">
-				<p>{props.name}</p>
+			<div onClick={() => props.clickHandler(props.keg)} className="row keg-list-item">
+				<div className="col-3">
+					<p>{props.keg.name}</p>
+				</div>
+				<div className="col-3">
+					<p>{props.keg.brand}</p>
+				</div>
+				<div className="col-3">
+					<p>${props.keg.price.toFixed(2)}</p>
+				</div>
+				<div className="col-3">
+					<p>{props.keg.alcoholContent}%</p>
+				</div>
 			</div>
-			<div className="col-3">
-				<p>{props.brand}</p>
-			</div>
-			<div className="col-3">
-				<p>${price}</p>
-			</div>
-			<div className="col-3">
-				<p>{alcoholContent}%</p>
-			</div>
-		</div>
 	);
 };
 
 KegListItem.propTypes = {
-	name: PropTypes.string.isRequired,
-	brand: PropTypes.string.isRequired,
-	price: PropTypes.number.isRequired,
-	alcoholContent: PropTypes.number.isRequired
+	keg: PropTypes.object,
+	clickHandler: PropTypes.func
 };
 
 export default KegListItem;
